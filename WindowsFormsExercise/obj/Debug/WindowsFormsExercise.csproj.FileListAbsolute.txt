@@ -1,0 +1,11 @@
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\bin\Debug\WindowsFormsExercise.exe.config
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\bin\Debug\WindowsFormsExercise.exe
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\bin\Debug\WindowsFormsExercise.pdb
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.csproj.AssemblyReference.cache
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.csproj.SuggestedBindingRedirects.cache
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.Properties.Resources.resources
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.csproj.GenerateResource.cache
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.csproj.CoreCompileInputs.cache
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.exe
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.pdb
+C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\CalculatorApp.Form1.resources
