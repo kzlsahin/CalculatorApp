@@ -55,19 +55,23 @@ namespace CalculatorApp
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.InputBox = new System.Windows.Forms.TextBox();
-            this.outputBox = new System.Windows.Forms.TextBox();
+            this.InputBox = new System.Windows.Forms.Label();
+            this.consolBox = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // ansScreen
             // 
+            this.ansScreen.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.ansScreen.Location = new System.Drawing.Point(6, 38);
             this.ansScreen.Name = "ansScreen";
+            this.ansScreen.ReadOnly = true;
             this.ansScreen.Size = new System.Drawing.Size(315, 20);
             this.ansScreen.TabIndex = 0;
             this.ansScreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.ansScreen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
+            this.ansScreen.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputBox_KeyPress);
             // 
             // button1
             // 
@@ -77,7 +81,7 @@ namespace CalculatorApp
             this.button1.TabIndex = 1;
             this.button1.Text = "1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button2
             // 
@@ -87,7 +91,7 @@ namespace CalculatorApp
             this.button2.TabIndex = 2;
             this.button2.Text = "2";
             this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button3
             // 
@@ -97,7 +101,7 @@ namespace CalculatorApp
             this.button3.TabIndex = 3;
             this.button3.Text = "3";
             this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.button3.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button4
             // 
@@ -107,7 +111,7 @@ namespace CalculatorApp
             this.button4.TabIndex = 4;
             this.button4.Text = "4";
             this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.button4.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button5
             // 
@@ -117,7 +121,7 @@ namespace CalculatorApp
             this.button5.TabIndex = 5;
             this.button5.Text = "5";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button5.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button6
             // 
@@ -127,7 +131,7 @@ namespace CalculatorApp
             this.button6.TabIndex = 6;
             this.button6.Text = "6";
             this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
+            this.button6.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // groupBox1
             // 
@@ -188,7 +192,7 @@ namespace CalculatorApp
             // buttonCA
             // 
             this.buttonCA.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.buttonCA.Location = new System.Drawing.Point(274, 16);
+            this.buttonCA.Location = new System.Drawing.Point(278, 16);
             this.buttonCA.Name = "buttonCA";
             this.buttonCA.Size = new System.Drawing.Size(47, 35);
             this.buttonCA.TabIndex = 22;
@@ -203,10 +207,11 @@ namespace CalculatorApp
             this.buttonSQRT.Name = "buttonSQRT";
             this.buttonSQRT.Size = new System.Drawing.Size(47, 35);
             this.buttonSQRT.TabIndex = 21;
+            this.buttonSQRT.Tag = "sqrt";
             this.buttonSQRT.Text = "X ^ -2";
             this.buttonSQRT.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSQRT.UseVisualStyleBackColor = false;
-            this.buttonSQRT.Click += new System.EventHandler(this.buttonSQRT_Click);
+            this.buttonSQRT.Click += new System.EventHandler(this.ButtonCompoundOperator_Click);
             // 
             // buttonSqr
             // 
@@ -215,10 +220,11 @@ namespace CalculatorApp
             this.buttonSqr.Name = "buttonSqr";
             this.buttonSqr.Size = new System.Drawing.Size(47, 35);
             this.buttonSqr.TabIndex = 20;
+            this.buttonSqr.Tag = "sqr";
             this.buttonSqr.Text = "X ^ 2";
             this.buttonSqr.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonSqr.UseVisualStyleBackColor = false;
-            this.buttonSqr.Click += new System.EventHandler(this.buttonSqr_Click);
+            this.buttonSqr.Click += new System.EventHandler(this.ButtonCompoundOperator_Click);
             // 
             // buttonRightParantheses
             // 
@@ -230,7 +236,7 @@ namespace CalculatorApp
             this.buttonRightParantheses.Text = ")";
             this.buttonRightParantheses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonRightParantheses.UseVisualStyleBackColor = false;
-            this.buttonRightParantheses.Click += new System.EventHandler(this.buttonRightParantheses_Click);
+            this.buttonRightParantheses.Click += new System.EventHandler(this.ButtonOperator_Click);
             // 
             // buttonLeftParantheses
             // 
@@ -242,7 +248,7 @@ namespace CalculatorApp
             this.buttonLeftParantheses.Text = "(";
             this.buttonLeftParantheses.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonLeftParantheses.UseVisualStyleBackColor = false;
-            this.buttonLeftParantheses.Click += new System.EventHandler(this.buttonLeftParantheses_Click);
+            this.buttonLeftParantheses.Click += new System.EventHandler(this.ButtonOperator_Click);
             // 
             // buttonDvider
             // 
@@ -254,7 +260,7 @@ namespace CalculatorApp
             this.buttonDvider.Text = "/";
             this.buttonDvider.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonDvider.UseVisualStyleBackColor = false;
-            this.buttonDvider.Click += new System.EventHandler(this.buttonDvider_Click);
+            this.buttonDvider.Click += new System.EventHandler(this.ButtonOperator_Click);
             // 
             // buttonMultiply
             // 
@@ -266,7 +272,7 @@ namespace CalculatorApp
             this.buttonMultiply.Text = "*";
             this.buttonMultiply.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonMultiply.UseVisualStyleBackColor = false;
-            this.buttonMultiply.Click += new System.EventHandler(this.buttonMultiply_Click);
+            this.buttonMultiply.Click += new System.EventHandler(this.ButtonOperator_Click);
             // 
             // buttonMinus
             // 
@@ -278,7 +284,7 @@ namespace CalculatorApp
             this.buttonMinus.Text = "-";
             this.buttonMinus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonMinus.UseVisualStyleBackColor = false;
-            this.buttonMinus.Click += new System.EventHandler(this.buttonMinus_Click);
+            this.buttonMinus.Click += new System.EventHandler(this.ButtonOperator_Click);
             // 
             // buttonPlus
             // 
@@ -290,7 +296,7 @@ namespace CalculatorApp
             this.buttonPlus.Text = "+";
             this.buttonPlus.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.buttonPlus.UseVisualStyleBackColor = false;
-            this.buttonPlus.Click += new System.EventHandler(this.buttonPlus_Click);
+            this.buttonPlus.Click += new System.EventHandler(this.ButtonOperator_Click);
             // 
             // buttonClear
             // 
@@ -322,7 +328,7 @@ namespace CalculatorApp
             this.buttonZero.TabIndex = 11;
             this.buttonZero.Text = "0";
             this.buttonZero.UseVisualStyleBackColor = true;
-            this.buttonZero.Click += new System.EventHandler(this.buttonZero_Click);
+            this.buttonZero.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // buttonDot
             // 
@@ -332,7 +338,7 @@ namespace CalculatorApp
             this.buttonDot.TabIndex = 10;
             this.buttonDot.Text = ".";
             this.buttonDot.UseVisualStyleBackColor = true;
-            this.buttonDot.Click += new System.EventHandler(this.buttonDot_Click);
+            this.buttonDot.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button9
             // 
@@ -342,7 +348,7 @@ namespace CalculatorApp
             this.button9.TabIndex = 9;
             this.button9.Text = "9";
             this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button9.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button8
             // 
@@ -352,7 +358,7 @@ namespace CalculatorApp
             this.button8.TabIndex = 8;
             this.button8.Text = "8";
             this.button8.UseVisualStyleBackColor = true;
-            this.button8.Click += new System.EventHandler(this.button8_Click);
+            this.button8.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // button7
             // 
@@ -362,7 +368,7 @@ namespace CalculatorApp
             this.button7.TabIndex = 7;
             this.button7.Text = "7";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.Click += new System.EventHandler(this.ButtonValue_Click);
             // 
             // groupBox2
             // 
@@ -377,35 +383,41 @@ namespace CalculatorApp
             // 
             // InputBox
             // 
-            this.InputBox.Location = new System.Drawing.Point(6, 19);
+            this.InputBox.BackColor = System.Drawing.Color.PaleGoldenrod;
+            this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.InputBox.Location = new System.Drawing.Point(6, 22);
+            this.InputBox.MaximumSize = new System.Drawing.Size(315, 17);
+            this.InputBox.MinimumSize = new System.Drawing.Size(315, 17);
             this.InputBox.Name = "InputBox";
-            this.InputBox.Size = new System.Drawing.Size(315, 20);
+            this.InputBox.Size = new System.Drawing.Size(315, 17);
             this.InputBox.TabIndex = 1;
-            this.InputBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.InputBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputBox_KeyPress);
+            this.InputBox.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // outputBox
+            // consolBox
             // 
-            this.outputBox.BackColor = System.Drawing.SystemColors.InfoText;
-            this.outputBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.outputBox.Location = new System.Drawing.Point(12, 286);
-            this.outputBox.Multiline = true;
-            this.outputBox.Name = "outputBox";
-            this.outputBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.outputBox.Size = new System.Drawing.Size(329, 318);
-            this.outputBox.TabIndex = 9;
-            this.outputBox.Text = "//Console:";
+            this.consolBox.BackColor = System.Drawing.SystemColors.InfoText;
+            this.consolBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.consolBox.Location = new System.Drawing.Point(12, 286);
+            this.consolBox.Multiline = true;
+            this.consolBox.Name = "consolBox";
+            this.consolBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.consolBox.Size = new System.Drawing.Size(329, 318);
+            this.consolBox.TabIndex = 9;
+            this.consolBox.Text = "//Console:";
+            this.consolBox.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(350, 613);
-            this.Controls.Add(this.outputBox);
+            this.ClientSize = new System.Drawing.Size(346, 613);
+            this.Controls.Add(this.consolBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputBox_KeyPress);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -435,7 +447,6 @@ namespace CalculatorApp
         private System.Windows.Forms.Button buttonPlus;
         private System.Windows.Forms.Button buttonMultiply;
         private System.Windows.Forms.Button buttonMinus;
-        private System.Windows.Forms.TextBox InputBox;
         private System.Windows.Forms.Button buttonCA;
         private System.Windows.Forms.Button buttonSQRT;
         private System.Windows.Forms.Button buttonSqr;
@@ -443,8 +454,9 @@ namespace CalculatorApp
         private System.Windows.Forms.Button buttonLeftParantheses;
         private System.Windows.Forms.Button buttonDvider;
         private System.Windows.Forms.Button buttonAns;
-        protected System.Windows.Forms.TextBox outputBox;
+        protected System.Windows.Forms.TextBox consolBox;
         private System.Windows.Forms.Button buttonConsol;
+        private System.Windows.Forms.Label InputBox;
     }
 }
 
