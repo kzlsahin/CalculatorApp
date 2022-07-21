@@ -50,7 +50,7 @@ namespace CalculatorApp
             this.buttonClear = new System.Windows.Forms.Button();
             this.button1Equal = new System.Windows.Forms.Button();
             this.buttonZero = new System.Windows.Forms.Button();
-            this.buttonComma = new System.Windows.Forms.Button();
+            this.buttonDot = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
@@ -145,7 +145,7 @@ namespace CalculatorApp
             this.groupBox1.Controls.Add(this.buttonClear);
             this.groupBox1.Controls.Add(this.button1Equal);
             this.groupBox1.Controls.Add(this.buttonZero);
-            this.groupBox1.Controls.Add(this.buttonComma);
+            this.groupBox1.Controls.Add(this.buttonDot);
             this.groupBox1.Controls.Add(this.button9);
             this.groupBox1.Controls.Add(this.button8);
             this.groupBox1.Controls.Add(this.button7);
@@ -324,15 +324,15 @@ namespace CalculatorApp
             this.buttonZero.UseVisualStyleBackColor = true;
             this.buttonZero.Click += new System.EventHandler(this.buttonZero_Click);
             // 
-            // buttonComma
+            // buttonDot
             // 
-            this.buttonComma.Location = new System.Drawing.Point(66, 139);
-            this.buttonComma.Name = "buttonComma";
-            this.buttonComma.Size = new System.Drawing.Size(47, 35);
-            this.buttonComma.TabIndex = 10;
-            this.buttonComma.Text = ",";
-            this.buttonComma.UseVisualStyleBackColor = true;
-            this.buttonComma.Click += new System.EventHandler(this.buttonComma_Click);
+            this.buttonDot.Location = new System.Drawing.Point(66, 139);
+            this.buttonDot.Name = "buttonDot";
+            this.buttonDot.Size = new System.Drawing.Size(47, 35);
+            this.buttonDot.TabIndex = 10;
+            this.buttonDot.Text = ".";
+            this.buttonDot.UseVisualStyleBackColor = true;
+            this.buttonDot.Click += new System.EventHandler(this.buttonDot_Click);
             // 
             // button9
             // 
@@ -427,7 +427,7 @@ namespace CalculatorApp
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button button1Equal;
         private System.Windows.Forms.Button buttonZero;
-        private System.Windows.Forms.Button buttonComma;
+        private System.Windows.Forms.Button buttonDot;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button7;
