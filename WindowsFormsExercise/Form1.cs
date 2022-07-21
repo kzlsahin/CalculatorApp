@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,6 +14,7 @@ namespace CalculatorApp
     {
         private double lastResult;
         private ArithmeticEvaluator Evaluator = new ArithmeticEvaluator();
+        private bool _isLastEntrySolved = false;
         public Form1()
         {
             InitializeComponent();
@@ -34,25 +35,31 @@ namespace CalculatorApp
             outputBox.Visible = outputBox.Visible ? false : true;
         }
 
-        private double GetResult(string expr)
+        protected double GetResult(string expr)
         {
             PrintLine($"{expr} evaluated");
+            _isLastEntrySolved = true;
             return Evaluator.Eval(expr);
-
         }
-        private void ShowLastResult()
+        protected void ShowLastResult()
         {
             PrintLine($"lastResult : {lastResult}");
             ansScreen.Text = "Ans = " + lastResult.ToString();
         }
-        private void PushCharToScreen(char inputChar)
+        protected void PushCharToScreen(char inputChar)
         {
+            if (_isLastEntrySolved)
+            {
+                InputBox.Text = "";
+            }
             InputBox.Text += inputChar;
-            
+            _isLastEntrySolved = false;
+
         }
         private void PushCharToScreen(string inputString)
         {
             InputBox.Text += inputString;
+            _isLastEntrySolved = false;
         }
 
         private void ClearScreen()
@@ -208,6 +215,11 @@ namespace CalculatorApp
         private void buttonConsol_Click(object sender, EventArgs e)
         {
             OpenCloseConsole();
+        }
+
+        private void InputBox_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ButtonEqual_Click(sender, e);
         }
     }
 }
