@@ -1,4 +1,4 @@
-﻿namespace CalculatorApp
+namespace CalculatorApp
 {
     partial class Form1
     {
@@ -36,6 +36,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.buttonConsol = new System.Windows.Forms.Button();
             this.buttonAns = new System.Windows.Forms.Button();
             this.buttonCA = new System.Windows.Forms.Button();
             this.buttonSQRT = new System.Windows.Forms.Button();
@@ -56,7 +57,6 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.InputBox = new System.Windows.Forms.TextBox();
             this.outputBox = new System.Windows.Forms.TextBox();
-            this.buttonConsol = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -161,6 +161,17 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // buttonConsol
+            // 
+            this.buttonConsol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
+            this.buttonConsol.Location = new System.Drawing.Point(13, 19);
+            this.buttonConsol.Name = "buttonConsol";
+            this.buttonConsol.Size = new System.Drawing.Size(47, 35);
+            this.buttonConsol.TabIndex = 24;
+            this.buttonConsol.Text = "Consol";
+            this.buttonConsol.UseVisualStyleBackColor = false;
+            this.buttonConsol.Click += new System.EventHandler(this.buttonConsol_Click);
             // 
             // buttonAns
             // 
@@ -371,6 +382,7 @@
             this.InputBox.Size = new System.Drawing.Size(315, 20);
             this.InputBox.TabIndex = 1;
             this.InputBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.InputBox.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputBox_KeyPress);
             // 
             // outputBox
             // 
@@ -384,17 +396,6 @@
             this.outputBox.TabIndex = 9;
             this.outputBox.Text = "//Console:";
             // 
-            // buttonConsol
-            // 
-            this.buttonConsol.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.buttonConsol.Location = new System.Drawing.Point(13, 19);
-            this.buttonConsol.Name = "buttonConsol";
-            this.buttonConsol.Size = new System.Drawing.Size(47, 35);
-            this.buttonConsol.TabIndex = 24;
-            this.buttonConsol.Text = "Consol";
-            this.buttonConsol.UseVisualStyleBackColor = false;
-            this.buttonConsol.Click += new System.EventHandler(this.buttonConsol_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -405,7 +406,6 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.Text = "Form1";
-            this.Click += new System.EventHandler(this.button1_Click);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
