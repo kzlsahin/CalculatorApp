@@ -135,9 +135,9 @@ namespace CalculatorApp
             PushCharToScreen('9');
         }
 
-        private void buttonComma_Click(object sender, EventArgs e)
+        private void buttonDot_Click(object sender, EventArgs e)
         {
-            PushCharToScreen(',');
+            PushCharToScreen('.');
         }
 
         private void buttonZero_Click(object sender, EventArgs e)
