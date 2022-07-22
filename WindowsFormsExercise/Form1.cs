@@ -13,7 +13,8 @@ namespace CalculatorApp
     public partial class Form1 : Form
     {
         private double lastResult;
-        private ArithmeticEvaluator Evaluator = new ArithmeticEvaluator();
+        private int _openParanthesis;
+        public ArithmeticEvaluator Evaluator = new ArithmeticEvaluator();
         private bool _isLastEntrySolved = false;
         public Form1()
         {
@@ -38,13 +39,31 @@ namespace CalculatorApp
             consolBox.Visible = consolBox.Visible ? false : true;
         }
 
+        protected void NotifyOpenParanthesis()
+        {
+            ansScreen.Text = "close the paranthesis";
+        }
         protected double GetResult(string expr)
         {
-            PrintLine($"{expr} evaluated");
-            _isLastEntrySolved = true;
+            try
+            {
+                var validationStatus = Evaluator.ValidateExpression(expr);
+                if (validationStatus.IsValid() == false)
+                {
+                    PrintLine(validationStatus.ToString());
+                    throw new ArgumentException("Expression syntax is not valid.");
+                }
+                lastResult = Evaluator.Eval(expr);
 
-            
-            return Evaluator.Eval(expr);
+                PrintLine($"{expr} evaluated");
+
+                _isLastEntrySolved = true;
+            }
+            catch (Exception ex)
+            {
+                PrintLine(ex.Message);
+            }
+            return lastResult;
         }
         protected void ShowLastResult()
         {
@@ -79,7 +98,23 @@ namespace CalculatorApp
         {
 
             InputBox.Text = String.Empty;
-            
+
+        }
+
+        private void NextExpression()
+        {
+            string expressionText = InputBox.Text;
+
+            if (Evaluator.anyOpenParenthesis(expressionText))
+            {
+                NotifyOpenParanthesis();
+                return;
+            }
+            else
+            {
+                lastResult = GetResult(expressionText);
+                ShowLastResult();
+            }
         }
 
         private void DeleteLastEntry()
@@ -88,12 +123,12 @@ namespace CalculatorApp
             if (text.Length == 0)
             {
                 return;
-            }            
+            }
             char lastRemoved = text[text.Length - 1];
-            
+
             InputBox.Text = text.Remove(text.Length - 1, 1);
 
-            if(lastRemoved == ' ')
+            if (lastRemoved == ' ')
             {
                 text = InputBox.Text;
                 InputBox.Text = text.Remove(text.Length - 1, 1);
@@ -102,12 +137,12 @@ namespace CalculatorApp
             {
                 text = InputBox.Text;
                 InputBox.Text = text.Remove(text.Length - 1, 1);
-            }            
+            }
         }
 
         private void ButtonValue_Click(Object sender, EventArgs e)
         {
-                PushCharToScreen( ( (Button)sender ).Text);
+            PushCharToScreen(((Button)sender).Text);
 
         }
 
@@ -122,28 +157,40 @@ namespace CalculatorApp
 
         private void ButtonCompoundOperator_Click(Object sender, EventArgs e)
         {
+            Button button;
+            try
+            {
+                button = (Button)sender;
+            }
+            catch (Exception ex)
+            {
+                PrintLine(ex.Message);
+                PrintLine("Button event called by non-button controller");
+                return;
+            }
             if (_isLastEntrySolved)
             {
                 PushCharToScreen(lastResult.ToString());
             }
-            bool isSqr = ((Button)sender).Tag == "sqr";
-            if (isSqr)
-            PushCharToScreen(" ^ ");
 
-            bool isSqrt = ((Button)sender).Tag == "sqrt";
-            if (isSqrt)
-                PushCharToScreen("^(1/2)");
+            if (button.Tag == "sqr")
+            {
+                PushCharToScreen(" ^ ");
+            }
+
+            if (button.Tag == "sqrt")
+            {
+                PrintLine(button.Text);
+                PrintLine("?X");
+                PrintLine($" {(char)8730}");
+                PushCharToScreen($" {(char)8730}");
+            }
 
         }
 
         private void ButtonEqual_Click(object sender, EventArgs e)
         {
-            string expressionText = InputBox.Text;
-
-            lastResult = GetResult(expressionText);
-            ShowLastResult();
-
-
+            NextExpression();            
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -167,7 +214,7 @@ namespace CalculatorApp
         {
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
             {
-                ButtonEqual_Click(sender, e);
+                NextExpression();
                 return;
             }
             if (e.KeyCode == Keys.Back)
@@ -175,8 +222,8 @@ namespace CalculatorApp
                 DeleteLastEntry();
                 return;
             }
-            
-           
+
+
         }
 
         private void InputBox_KeyPress(object sender, KeyPressEventArgs e)

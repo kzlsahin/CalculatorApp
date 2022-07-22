@@ -33,8 +33,8 @@ namespace CalculatorApp
             double[] testResults_1 = { 24 + 3, 0 + 0, 0 + 1, 2, 2, 5 - 2, 2 - 8, 5 + 11 - 3, 2 * 5 + 3 - 9, -10 + 5, 5 - 6 + 5, 4 - 2 - 5, 4 - 4 - 3 };
             string[] testExpressions_2 = { "2 * 3", "1 * 2", "* 2", "4 / 2", "5 * 3 * 4", "0 * 2 ", "0*2", "1*4", "5*5", "5^2", "5^0", "(4 + 2) / 2", "(4 + 2)/2", "4 ^ ( -2)" };
             double[] testResults_2 = { 6, 2, 2, 2, 60, 0, 0, 4, 25, 25, 1, 3, 3, 2 };
-            string[] testExpressions_3 = { "1 - 2 * (5 + 12 / 4)", "16^(1/2) * 2", "((5 + 6/2) + 2 * 3) + 9 - 22 / 2 * 3" };
-            double[] testResults_3 = { (1 - 2 * (5 + 12 / 4)), 8, (((5 + 6 / 2) + 2 * 3) + 9 - 22 / 2 * 3) };
+            string[] testExpressions_3 = { "1 - 2 * (5 + 12 / 4)","(2 + 2 * (3 - 1))", "16^(1/2) * 2", "((5 + 6/2) + 2 * 3) + 9 - 22 / 2 * 3" };
+            double[] testResults_3 = { (1 - 2 * (5 + 12 / 4)), 6, 8, (((5 + 6 / 2) + 2 * 3) + 9 - 22 / 2 * 3) };
 
             int countFailed = 0;
 
@@ -53,7 +53,8 @@ namespace CalculatorApp
 
             PrintLine($"number of failed tests : {countFailed}");
 
-            
+
+
             Application.Run(FormApp);
 
         }
