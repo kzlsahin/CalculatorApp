@@ -64,7 +64,7 @@ namespace CalculatorApp
             // ansScreen
             // 
             this.ansScreen.BackColor = System.Drawing.Color.PaleGoldenrod;
-            this.ansScreen.Location = new System.Drawing.Point(6, 38);
+            this.ansScreen.Location = new System.Drawing.Point(6, 32);
             this.ansScreen.Name = "ansScreen";
             this.ansScreen.ReadOnly = true;
             this.ansScreen.Size = new System.Drawing.Size(315, 20);
@@ -374,7 +374,7 @@ namespace CalculatorApp
             // 
             this.groupBox2.Controls.Add(this.InputBox);
             this.groupBox2.Controls.Add(this.ansScreen);
-            this.groupBox2.Location = new System.Drawing.Point(12, 12);
+            this.groupBox2.Location = new System.Drawing.Point(12, 21);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(327, 58);
             this.groupBox2.TabIndex = 8;
@@ -385,7 +385,7 @@ namespace CalculatorApp
             // 
             this.InputBox.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.InputBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.InputBox.Location = new System.Drawing.Point(6, 22);
+            this.InputBox.Location = new System.Drawing.Point(6, 16);
             this.InputBox.MaximumSize = new System.Drawing.Size(315, 17);
             this.InputBox.MinimumSize = new System.Drawing.Size(315, 17);
             this.InputBox.Name = "InputBox";
@@ -410,7 +410,7 @@ namespace CalculatorApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(346, 613);
+            this.ClientSize = new System.Drawing.Size(352, 613);
             this.Controls.Add(this.consolBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);

@@ -20,3 +20,14 @@ C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\Calcula
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.CoreCompileInputs.cache
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.exe
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.pdb
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.AssemblyReference.cache
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.SuggestedBindingRedirects.cache
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.Form1.resources
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.GenerateResource.cache
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.CoreCompileInputs.cache
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\bin\Debug\CalculatorApp.exe.config
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\bin\Debug\CalculatorApp.exe
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\bin\Debug\CalculatorApp.pdb
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.Properties.Resources.resources
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.exe
+D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.pdb
