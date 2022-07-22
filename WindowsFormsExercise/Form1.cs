@@ -19,6 +19,7 @@ namespace CalculatorApp
         public Form1()
         {
             InitializeComponent();
+            buttonSQRT.Text = "\u221aX";
         }
 
         public void PrintLine(string str)

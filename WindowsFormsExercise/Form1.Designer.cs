@@ -69,7 +69,7 @@ namespace CalculatorApp
             this.ansScreen.Margin = new System.Windows.Forms.Padding(4);
             this.ansScreen.Name = "ansScreen";
             this.ansScreen.ReadOnly = true;
-            this.ansScreen.Size = new System.Drawing.Size(470, 26);
+            this.ansScreen.Size = new System.Drawing.Size(472, 26);
             this.ansScreen.TabIndex = 0;
             this.ansScreen.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.ansScreen.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
@@ -216,7 +216,7 @@ namespace CalculatorApp
             // buttonSQRT
             // 
             this.buttonSQRT.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.buttonSQRT.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.buttonSQRT.Font = new System.Drawing.Font("Microsoft JhengHei", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSQRT.Location = new System.Drawing.Point(417, 193);
             this.buttonSQRT.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSQRT.Name = "buttonSQRT";
