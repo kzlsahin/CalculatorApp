@@ -165,8 +165,6 @@ namespace CalculatorApp
 
         private void InputBox_KeyDown(object sender, KeyEventArgs e)
         {
-            
-            Print("key Down");
             if (e.KeyCode == Keys.Enter || e.KeyCode == Keys.Return)
             {
                 ButtonEqual_Click(sender, e);
@@ -185,7 +183,6 @@ namespace CalculatorApp
         {
 
             //if decimal entry
-            Print("keyPressed");
             char keyChar;
 
             if ((int)e.KeyChar >= 96 && (int)e.KeyChar <= 105)
