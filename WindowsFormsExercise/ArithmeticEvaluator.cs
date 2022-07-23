@@ -229,7 +229,7 @@ namespace ArithmeticEvaluator
             //returns only top level blocks
             //return expression wraped in parenthesis, (...)
             expr = expr.Trim();
-            string[] result = new string[0];
+            string[] result;
             int counter = 0;
             var indexStack = new Stack<int[]>();
             bool isOpenBlock = false;
@@ -240,32 +240,33 @@ namespace ArithmeticEvaluator
                 foreach (char c in expr)
                 {
                     if (c == '(')
-                    {
-                        counter++;
-                        Console.WriteLine($"push, index:{index} counter:{counter}");
+                    {                        
                         //open a paranthesis
-                        indexStack.Push(new int[2] { index, 0 });
-                        isOpenBlock = true;
-                        //Parenthesis is included so length of the block begins with 1
-                        lengthOfBlock = 1;
+                        if(counter == 0)
+                        {
+                            indexStack.Push(new int[2] { index, 0 });
+                            isOpenBlock = true;
+                            //Parenthesis is included so length of the block begins with 1
+                            lengthOfBlock = 1;
+                        }
+                        counter++;
+                    }
+
+                    if (c == ')')
+                    {
+                        counter--;
+
                     }
                     //if counter == 0 means that there is no more open paranthesis
                     // that means the first paranthesis is closed
                     if (isOpenBlock)
                     {
 
-
-                        if (c == ')')
-                        {
-                            counter--;
-
-                        }
                         if (counter == 0)
                         {
                             int[] lastIndexes = indexStack.Pop();
                             lastIndexes[1] = lengthOfBlock;
                             indexStack.Push(lastIndexes);
-                            Console.WriteLine($"pop, index:{index} counter:{counter}");
                             isOpenBlock = false;
                         }
                         lengthOfBlock++;
@@ -282,7 +283,6 @@ namespace ArithmeticEvaluator
                 int i = 0;
                 foreach (int[] indexes in indexStack)
                 {
-                    Console.WriteLine($"write, index0:{indexes[0]} index1:{indexes[1]}");
                     result[i] = expr.Substring(indexes[0], indexes[1]);
                     i++;
                 }
