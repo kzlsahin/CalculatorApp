@@ -16,6 +16,7 @@ namespace CalculatorApp
         private double lastResult;
         private int _openParanthesis;
         private bool _isLastEntrySolved = false;
+        private string  _lastExpression = "";
         private ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
         public Form1()
         {
@@ -39,6 +40,14 @@ namespace CalculatorApp
         public void OpenCloseConsole()
         {
             consolBox.Visible = consolBox.Visible ? false : true;
+            if (consolBox.Size.Height == 67)
+            {
+                consolBox.Size = new Size(492, 350);
+            }
+            else
+            {
+                consolBox.Size = new Size(492, 67);
+            }
         }
 
         protected void NotifyOpenParanthesis()
@@ -61,6 +70,7 @@ namespace CalculatorApp
                 PrintLine($"{expr} evaluated");
 
                 _isLastEntrySolved = true;
+                _lastExpression = expr;
             }
             catch (Exception ex)
             {
@@ -310,6 +320,11 @@ namespace CalculatorApp
         private void buttonConsol_Click(object sender, EventArgs e)
         {
             OpenCloseConsole();
+        }
+
+        private void ButtonLastEntry_Click(object sender, EventArgs e)
+        {
+            InputBox.Text = _lastExpression;
         }
     }
 }

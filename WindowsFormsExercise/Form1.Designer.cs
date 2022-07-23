@@ -58,6 +58,7 @@ namespace CalculatorApp
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.InputBox = new System.Windows.Forms.Label();
             this.consolBox = new System.Windows.Forms.TextBox();
+            this.ButtonLastEntry = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -168,11 +169,11 @@ namespace CalculatorApp
             this.groupBox1.Controls.Add(this.button3);
             this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
-            this.groupBox1.Location = new System.Drawing.Point(18, 118);
+            this.groupBox1.Location = new System.Drawing.Point(21, 153);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(494, 270);
+            this.groupBox1.Size = new System.Drawing.Size(494, 259);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             // 
@@ -403,7 +404,7 @@ namespace CalculatorApp
             // 
             this.groupBox2.Controls.Add(this.InputBox);
             this.groupBox2.Controls.Add(this.ansScreen);
-            this.groupBox2.Location = new System.Drawing.Point(18, 30);
+            this.groupBox2.Location = new System.Drawing.Point(25, 27);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
@@ -429,21 +430,35 @@ namespace CalculatorApp
             this.consolBox.BackColor = System.Drawing.SystemColors.InfoText;
             this.consolBox.Font = new System.Drawing.Font("Arial Black", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.consolBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.consolBox.Location = new System.Drawing.Point(18, 396);
+            this.consolBox.Location = new System.Drawing.Point(25, 420);
             this.consolBox.Margin = new System.Windows.Forms.Padding(4);
             this.consolBox.Multiline = true;
             this.consolBox.Name = "consolBox";
             this.consolBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.consolBox.Size = new System.Drawing.Size(492, 439);
+            this.consolBox.Size = new System.Drawing.Size(492, 67);
             this.consolBox.TabIndex = 9;
             this.consolBox.Text = "//Console:";
             this.consolBox.Visible = false;
+            // 
+            // ButtonLastEntry
+            // 
+            this.ButtonLastEntry.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
+            this.ButtonLastEntry.Location = new System.Drawing.Point(327, 114);
+            this.ButtonLastEntry.Name = "ButtonLastEntry";
+            this.ButtonLastEntry.Size = new System.Drawing.Size(179, 32);
+            this.ButtonLastEntry.TabIndex = 10;
+            this.ButtonLastEntry.Text = "Last entry";
+            this.ButtonLastEntry.UseVisualStyleBackColor = true;
+            this.ButtonLastEntry.Click += new System.EventHandler(this.ButtonLastEntry_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(528, 849);
+            this.AutoSize = true;
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(538, 522);
+            this.Controls.Add(this.ButtonLastEntry);
             this.Controls.Add(this.consolBox);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
@@ -451,6 +466,7 @@ namespace CalculatorApp
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
+            this.Padding = new System.Windows.Forms.Padding(25);
             this.Text = "Form1";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.InputBox_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.InputBox_KeyPress);
@@ -493,6 +509,7 @@ namespace CalculatorApp
         protected System.Windows.Forms.TextBox consolBox;
         private System.Windows.Forms.Button buttonConsol;
         private System.Windows.Forms.Label InputBox;
+        private System.Windows.Forms.Button ButtonLastEntry;
     }
 }
 
