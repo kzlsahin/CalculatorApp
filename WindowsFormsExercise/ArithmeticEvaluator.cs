@@ -10,13 +10,13 @@ namespace ArithmeticEvaluator
     public class Evaluator
     {
 
-        public static readonly char[] _operators = { '+', '-', '/', '*', '^', '√' };
+        public static readonly char[] Operators = { '+', '-', '/', '*', '^', '√' };
 
         public Func<string, bool> WrappedInParanthesis = ArithmeticExpression.WrappedInParanthesis;
         public Func<string, bool> HasOperators = ArithmeticExpression.HasOperators;
         public Func<string, bool> IsExpr = ArithmeticExpression.IsExpr;
 
-        public  ArithmaticExpressionvalidationResult ValidateExpression(string expr)
+        public ArithmaticExpressionvalidationResult ValidateExpression(string expr)
         {
             var res = new ArithmaticExpressionvalidationResult(AnyOpenParenthesis(expr), AnyConsecutiveOperator(expr));
             return res;
@@ -45,7 +45,7 @@ namespace ArithmeticEvaluator
             char prevC = ' ';
             foreach (char c in expr)
             {
-                if(c == ' ')
+                if (c == ' ')
                 {
                     continue;
                 }
@@ -54,7 +54,7 @@ namespace ArithmeticEvaluator
                     prevC = c;
                     continue;
                 }
-                if (_operators.Contains(c) && _operators.Contains(prevC))
+                if (Operators.Contains(c) && Operators.Contains(prevC))
                 {
                     return true;
                 }
@@ -63,7 +63,7 @@ namespace ArithmeticEvaluator
             return false;
         }
 
-        public double Eval(string expr, double ifNullOrEmptyReturn=0)
+        public double Eval(string expr, double ifNullOrEmptyReturn = 0)
         {
             string defaultValue = ifNullOrEmptyReturn.ToString();
             return GetDoubleValue(expr, defaultValue);
@@ -72,7 +72,7 @@ namespace ArithmeticEvaluator
         {
             double res = 0;
             a = a.Trim();
-           
+
             if (a == string.Empty || a == null)
             {
                 a = baseValue;
@@ -92,7 +92,7 @@ namespace ArithmeticEvaluator
             }
 
             // transform expression like number() to number * () 
-            foreach (Match match in Regex.Matches(expr, @"\d+\s*[(]") )
+            foreach (Match match in Regex.Matches(expr, @"\d+\s*[(]"))
             {
                 string replacedExpression = match.Value.Replace("(", "*(");
                 expr = expr.Replace(match.Value, replacedExpression);
@@ -148,7 +148,15 @@ namespace ArithmeticEvaluator
                 string value = expr.Substring(1);
                 return CalculateSqrt(value);
             }
-            throw new InvalidOperationException("Artihmetic expression couldn't be parsed");
+            try
+            {
+                return GetDoubleValue(expr);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Arithmetic Expression couldn't be solved");
+            }
+
         }
 
         private double CalculateSqrt(string value)
@@ -332,16 +340,17 @@ namespace ArithmeticEvaluator
                     return false;
                 }
                 isfirstParanthesisOpen = true;
-                foreach(char c in expr)
+                foreach (char c in expr)
                 {
                     //if there is more chars after first paranthesis is closed
                     if (isfirstParanthesisOpen == false)
                     {
                         return false;
                     }
-                    if(c == ')'){
+                    if (c == ')')
+                    {
                         counter--;
-                        
+
                     }
                     if (c == '(')
                     {
@@ -349,7 +358,7 @@ namespace ArithmeticEvaluator
                     }
                     //if counter == 0 means that there is no more open paranthesis
                     // that means the first paranthesis is closed
-                    if(counter == 0)
+                    if (counter == 0)
                     {
                         isfirstParanthesisOpen = false;
                     }
@@ -360,9 +369,9 @@ namespace ArithmeticEvaluator
 
             public static bool HasOperators(string expr)
             {
-                foreach(char c in expr)
+                foreach (char c in expr)
                 {
-                    if(_operators.Contains(c))
+                    if (Operators.Contains(c))
                     {
                         return true;
                     }

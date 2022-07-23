@@ -70,7 +70,7 @@ namespace CalculatorApp
         }
         protected void ShowLastResult()
         {
-            if(_isLastEntrySolved)
+            if (_isLastEntrySolved)
             {
                 PrintLine($"lastResult : {lastResult}");
                 ansScreen.Text = "Ans = " + lastResult.ToString();
@@ -79,30 +79,49 @@ namespace CalculatorApp
             {
                 ansScreen.Text = "expression couldn't be resolved";
             }
-            
+
         }
-        protected void PushCharToScreen(char inputChar)
+        protected void PushToInputScreen(char inputChar)
         {
             if (_isLastEntrySolved)
             {
-                InputBox.Text = lastResult.ToString();
+                if (Evaluator.Operators.Contains(inputChar))
+                {
+                    InputBox.Text = lastResult.ToString();
+                }
+                else
+                {
+                    InputBox.Text = String.Empty;
+                }
+                _isLastEntrySolved = false;
             }
-            InputBox.Text += inputChar;
-            _isLastEntrySolved = false;
-            ansScreen.Focus();
-
-
+                InputBox.Text += inputChar;
+                ansScreen.Focus();
         }
-        private void PushCharToScreen(string inputString)
-        {
-            if (_isLastEntrySolved)
-            {
-                InputBox.Text = lastResult.ToString();
-            }
-            InputBox.Text += inputString;
-            _isLastEntrySolved = false;
-            ansScreen.Focus();
 
+        private void PushToInputScreen(string inputString)
+        {
+            bool isOperator = false;
+            if (inputString.Trim().Length == 1)
+            {
+                isOperator = Evaluator.Operators.Contains(inputString.Trim()[0]);
+                PrintLine($"isoperator: {isOperator}  input: {inputString} isLastEntrySolve= {_isLastEntrySolved}");
+            }
+            if (_isLastEntrySolved )
+            {
+                if (isOperator)
+                {
+                    InputBox.Text = lastResult.ToString();
+                }
+                else
+                {
+                    InputBox.Text = String.Empty;
+
+                }
+                _isLastEntrySolved = false;
+            }
+                InputBox.Text += inputString;
+                ansScreen.Focus();
         }
 
         private void ClearScreen()
@@ -153,17 +172,13 @@ namespace CalculatorApp
 
         private void ButtonValue_Click(Object sender, EventArgs e)
         {
-            PushCharToScreen(((Button)sender).Text);
+            PushToInputScreen(((Button)sender).Text);
 
         }
 
         private void ButtonOperator_Click(Object sender, EventArgs e)
         {
-            if (_isLastEntrySolved)
-            {
-                PushCharToScreen(lastResult.ToString());
-            }
-            PushCharToScreen($" {((Button)sender).Text} ");
+            PushToInputScreen($" {((Button)sender).Text} ");
         }
 
         private void ButtonCompoundOperator_Click(Object sender, EventArgs e)
@@ -179,14 +194,10 @@ namespace CalculatorApp
                 PrintLine("Button event called by non-button controller");
                 return;
             }
-            if (_isLastEntrySolved)
-            {
-                PushCharToScreen(lastResult.ToString());
-            }
 
             if (button.Tag == "sqr")
             {
-                PushCharToScreen(" ^ ");
+                PushToInputScreen(" ^ ");
             }
 
             if (button.Tag == "sqrt")
@@ -194,14 +205,14 @@ namespace CalculatorApp
                 PrintLine(button.Text);
                 PrintLine("?X");
                 PrintLine($" {(char)8730}");
-                PushCharToScreen($" {(char)8730}");
+                PushToInputScreen($" {(char)8730}");
             }
 
         }
 
         private void ButtonEqual_Click(object sender, EventArgs e)
         {
-            NextExpression();            
+            NextExpression();
         }
 
         private void buttonClear_Click(object sender, EventArgs e)
@@ -218,7 +229,7 @@ namespace CalculatorApp
 
         private void buttonAns_Click(object sender, EventArgs e)
         {
-            PushCharToScreen(lastResult.ToString());
+            PushToInputScreen(lastResult.ToString());
         }
 
         private void InputBox_KeyDown(object sender, KeyEventArgs e)
@@ -254,7 +265,7 @@ namespace CalculatorApp
             }
             if (keyChar >= '0' && keyChar <= '9')
             {
-                PushCharToScreen(keyChar);
+                PushToInputScreen(keyChar);
                 e.Handled = true;
                 return;
             }
@@ -291,7 +302,7 @@ namespace CalculatorApp
             }
             if (op != String.Empty)
             {
-                PushCharToScreen(op);
+                PushToInputScreen(op);
             }
             e.Handled = true;
 
