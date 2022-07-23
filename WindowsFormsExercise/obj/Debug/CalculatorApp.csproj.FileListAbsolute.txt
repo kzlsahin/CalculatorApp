@@ -9,17 +9,11 @@ C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExe
 C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.CoreCompileInputs.cache
 C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.exe
 C:\Users\deniz\OneDrive\Belgeler\Bilge Adam\WindowsFormsExercise\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.pdb
-C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\bin\Debug\WindowsFormsExercise.exe.config
-C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\bin\Debug\WindowsFormsExercise.exe
-C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\bin\Debug\WindowsFormsExercise.pdb
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.AssemblyReference.cache
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.SuggestedBindingRedirects.cache
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.Form1.resources
-C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.Properties.Resources.resources
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.GenerateResource.cache
 C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.CoreCompileInputs.cache
-C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.exe
-C:\Users\deniz\Source\Repos\CalculatorApp\WindowsFormsExercise\obj\Debug\WindowsFormsExercise.pdb
 D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.AssemblyReference.cache
 D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.csproj.SuggestedBindingRedirects.cache
 D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.Form1.resources
@@ -31,3 +25,9 @@ D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\bin\Debug\Calcula
 D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.Properties.Resources.resources
 D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.exe
 D:\mustafa_workspace\dotnet\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.pdb
+C:\Users\deniz\source\repos\CalculatorApp\WindowsFormsExercise\bin\Debug\CalculatorApp.exe.config
+C:\Users\deniz\source\repos\CalculatorApp\WindowsFormsExercise\bin\Debug\CalculatorApp.exe
+C:\Users\deniz\source\repos\CalculatorApp\WindowsFormsExercise\bin\Debug\CalculatorApp.pdb
+C:\Users\deniz\source\repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.Properties.Resources.resources
+C:\Users\deniz\source\repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.exe
+C:\Users\deniz\source\repos\CalculatorApp\WindowsFormsExercise\obj\Debug\CalculatorApp.pdb

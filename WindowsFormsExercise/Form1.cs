@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ArithmeticEvaluator;
 
 namespace CalculatorApp
 {
@@ -14,8 +15,8 @@ namespace CalculatorApp
     {
         private double lastResult;
         private int _openParanthesis;
-        public ArithmeticEvaluator Evaluator = new ArithmeticEvaluator();
         private bool _isLastEntrySolved = false;
+        private ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
         public Form1()
         {
             InitializeComponent();
@@ -48,13 +49,14 @@ namespace CalculatorApp
         {
             try
             {
-                var validationStatus = Evaluator.ValidateExpression(expr);
+                var validationStatus = evaluator.ValidateExpression(expr);
                 if (validationStatus.IsValid() == false)
                 {
                     PrintLine(validationStatus.ToString());
+                    _isLastEntrySolved = false;
                     throw new ArgumentException("Expression syntax is not valid.");
                 }
-                lastResult = Evaluator.Eval(expr);
+                lastResult = evaluator.Eval(expr);
 
                 PrintLine($"{expr} evaluated");
 
@@ -68,8 +70,16 @@ namespace CalculatorApp
         }
         protected void ShowLastResult()
         {
-            PrintLine($"lastResult : {lastResult}");
-            ansScreen.Text = "Ans = " + lastResult.ToString();
+            if(_isLastEntrySolved)
+            {
+                PrintLine($"lastResult : {lastResult}");
+                ansScreen.Text = "Ans = " + lastResult.ToString();
+            }
+            else
+            {
+                ansScreen.Text = "expression couldn't be resolved";
+            }
+            
         }
         protected void PushCharToScreen(char inputChar)
         {
@@ -106,7 +116,7 @@ namespace CalculatorApp
         {
             string expressionText = InputBox.Text;
 
-            if (Evaluator.anyOpenParenthesis(expressionText))
+            if (evaluator.AnyOpenParenthesis(expressionText))
             {
                 NotifyOpenParanthesis();
                 return;

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static ArithmeticEvaluator.Evaluator;
 
 namespace CalculatorApp
 {
@@ -15,7 +16,7 @@ namespace CalculatorApp
         static Form1 FormApp;
         static Action<string> PrintLine;
         static Action<string> Print;
-
+        static ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
         [STAThread]
         static void Main()
         {
@@ -33,8 +34,8 @@ namespace CalculatorApp
             double[] testResults_1 = { 24 + 3, 0 + 0, 0 + 1, 2, 2, 5 - 2, 2 - 8, 5 + 11 - 3, 2 * 5 + 3 - 9, -10 + 5, 5 - 6 + 5, 4 - 2 - 5, 4 - 4 - 3 };
             string[] testExpressions_2 = { "2 * 3", "1 * 2", "* 2", "4 / 2", "5 * 3 * 4", "0 * 2 ", "0*2", "1*4", "5*5", "5^2", "5^0", "(4 + 2) / 2", "(4 + 2)/2", "4 ^ ( -2)" };
             double[] testResults_2 = { 6, 2, 2, 2, 60, 0, 0, 4, 25, 25, 1, 3, 3, 2 };
-            string[] testExpressions_3 = { "1 - 2 * (5 + 12 / 4)","(2 + 2 * (3 - 1))", "16^(1/2) * 2", "((5 + 6/2) + 2 * 3) + 9 - 22 / 2 * 3" };
-            double[] testResults_3 = { (1 - 2 * (5 + 12 / 4)), 6, 8, (((5 + 6 / 2) + 2 * 3) + 9 - 22 / 2 * 3) };
+            string[] testExpressions_3 = { "1 - 2 * (5 + 12 / 4)","(2 + 2 * (3 - 1))", "16^(1/2) * 2", "((5 + 6/2) + 2 * 3) + 9 - 22 / 2 * 3", "(3+2)*(2)" };
+            double[] testResults_3 = { (1 - 2 * (5 + 12 / 4)), 6, 8, (((5 + 6 / 2) + 2 * 3) + 9 - 22 / 2 * 3), 7 };
 
             int countFailed = 0;
 
@@ -59,24 +60,37 @@ namespace CalculatorApp
 
         }
 
-        public static ArithmeticEvaluator Aritma = new ArithmeticEvaluator();
         public static bool TestAritma(string expr, double expected)
         {
-            double result = Aritma.Eval(expr);
-            bool res = expected == result;
+            string message;
+            double result;
+            PrintLine(" ");
             Print("test expr: " + expr);
             Print("   expected: " + expected);
-            PrintLine($"  result: {result}");
 
-            if (res)
+            try
             {
-                PrintLine($"   Passed");
+                result = evaluator.Eval(expr);
+                bool res = expected == result;
+
+                PrintLine($"  result: {result}");
+
+                if (res)
+                {
+                    PrintLine($"   Passed");
+                }
+                else
+                {
+                    PrintLine($"   Failed");
+                }
+                return res;
             }
-            else
-            {
-                PrintLine($"   Failed");
+            catch(Exception ex) {
+                message = ex.Message;
+                PrintLine($"Exception!! {message}");
+                return false;
             }
-            return res;
+           
         }
     }
 }

@@ -5,36 +5,24 @@ using System.Text.RegularExpressions;
 // Compiler version 4.0, .NET Framework 4.5
 
 
-namespace CalculatorApp
+namespace ArithmeticEvaluator
 {
-    public class ArithmeticEvaluator
+    public class Evaluator
     {
 
-        static char[] _operators = {'+', '-', '/',  '*', '^' };
+        public static readonly char[] _operators = { '+', '-', '/', '*', '^', '√' };
 
-        public bool WrappedInParanthesis(string expr)
-        {
-            expr = expr.Trim();
-            return expr.StartsWith("(") && expr.EndsWith(")");
-        }
+        public Func<string, bool> WrappedInParanthesis = ArithmeticExpression.WrappedInParanthesis;
+        public Func<string, bool> HasOperators = ArithmeticExpression.HasOperators;
+        public Func<string, bool> IsExpr = ArithmeticExpression.IsExpr;
 
-        public bool HasOperators(string expr)
+        public  ArithmaticExpressionvalidationResult ValidateExpression(string expr)
         {
-            Regex rx = new Regex(@"[*/^+-]");
-            return rx.IsMatch(expr);
-        }
-        public bool IsExpr(string expr)
-        {
-            return WrappedInParanthesis(expr) || HasOperators(expr);
-        }
-
-        public ArithmaticExpressionvalidationStatus ValidateExpression(string expr)
-        {
-            var res = new ArithmaticExpressionvalidationStatus(anyOpenParenthesis(expr), anyConsecutiveOperator(expr));
+            var res = new ArithmaticExpressionvalidationResult(AnyOpenParenthesis(expr), AnyConsecutiveOperator(expr));
             return res;
         }
 
-        public bool anyOpenParenthesis(string expr)
+        public bool AnyOpenParenthesis(string expr)
         {
             int openParenthesis = 0;
             foreach (char c in expr)
@@ -52,17 +40,21 @@ namespace CalculatorApp
             return openParenthesis != 0;
         }
 
-        public bool anyConsecutiveOperator(string expr)
+        public bool AnyConsecutiveOperator(string expr)
         {
             char prevC = ' ';
             foreach (char c in expr)
             {
+                if(c == ' ')
+                {
+                    continue;
+                }
                 if (prevC == ' ')
                 {
                     prevC = c;
                     continue;
                 }
-                if(_operators.Contains(c) && _operators.Contains(prevC) )
+                if (_operators.Contains(c) && _operators.Contains(prevC))
                 {
                     return true;
                 }
@@ -71,26 +63,55 @@ namespace CalculatorApp
             return false;
         }
 
-        public double Eval(string expr)
+        public double Eval(string expr, double ifNullOrEmptyReturn=0)
+        {
+            string defaultValue = ifNullOrEmptyReturn.ToString();
+            return GetDoubleValue(expr, defaultValue);
+        }
+        private double GetDoubleValue(string a, string baseValue = "0")
+        {
+            double res = 0;
+            a = a.Trim();
+           
+            if (a == string.Empty || a == null)
+            {
+                a = baseValue;
+            }
+            res = IsExpr(a) ? EvalExpression(a) : double.Parse(a);
+            return res;
+        }
+        private double EvalExpression(string expr)
         {
             expr = expr.Trim();
-
+            // if the whole  expression is inside a single parathesis block
+            // we shall unwrap the expression
             if (WrappedInParanthesis(expr))
             {
                 expr = expr.Substring(1, expr.Length - 2);
-                return Eval(expr);
+                expr = expr.Trim();
             }
-            foreach (Match match in Regex.Matches(expr, @"\d+\s*[(]"))
+
+            // transform expression like number() to number * () 
+            foreach (Match match in Regex.Matches(expr, @"\d+\s*[(]") )
             {
                 string replacedExpression = match.Value.Replace("(", "*(");
                 expr = expr.Replace(match.Value, replacedExpression);
             }
-            foreach (Match match in Regex.Matches(expr, @"[(].+[)]"))
+            // transform expressions like )( to number )*(
+            foreach (Match match in Regex.Matches(expr, @"[)]\s*[(]"))
             {
-                string replacedExpression = Eval(match.Value).ToString();
+                string replacedExpression = match.Value.Replace("(", "*(");
                 expr = expr.Replace(match.Value, replacedExpression);
             }
 
+            // evaluate sub parathesis blocks first
+            foreach (String parantblock in GetParanthesisBlocks(expr))
+            {
+                string replacedExpression = GetDoubleValue(parantblock).ToString();
+                expr = expr.Replace(parantblock, replacedExpression);
+            }
+
+            //Coution evaluator reaches here after all the sub paranthesis are evaluated before
 
             if (expr.Contains('+'))
             {
@@ -130,13 +151,13 @@ namespace CalculatorApp
             throw new InvalidOperationException("Artihmetic expression couldn't be parsed");
         }
 
-        public double CalculateSqrt(string value)
+        private double CalculateSqrt(string value)
         {
             double val = GetDoubleValue(value);
             return Math.Sqrt(val);
         }
 
-        public double Operate(string[] args, char OpSymbol)
+        private double Operate(string[] args, char OpSymbol)
         {
             double res = 0;
             double x;
@@ -195,24 +216,78 @@ namespace CalculatorApp
             return res;
         }
 
-        public double GetDoubleValue(string a, string baseValue = "0")
+        private static string[] GetParanthesisBlocks(string expr)
         {
-            double res = 0;
-            a = a.Trim();
-            if (a == string.Empty || a == null)
+            //returns only top level blocks
+            //return expression wraped in parenthesis, (...)
+            expr = expr.Trim();
+            string[] result = new string[0];
+            int counter = 0;
+            var indexStack = new Stack<int[]>();
+            bool isOpenBlock = false;
+
             {
-                a = baseValue;
+                int index = 0;
+                int lengthOfBlock = 0;
+                foreach (char c in expr)
+                {
+                    if (c == '(')
+                    {
+                        counter++;
+                        Console.WriteLine($"push, index:{index} counter:{counter}");
+                        //open a paranthesis
+                        indexStack.Push(new int[2] { index, 0 });
+                        isOpenBlock = true;
+                        //Parenthesis is included so length of the block begins with 1
+                        lengthOfBlock = 1;
+                    }
+                    //if counter == 0 means that there is no more open paranthesis
+                    // that means the first paranthesis is closed
+                    if (isOpenBlock)
+                    {
+
+
+                        if (c == ')')
+                        {
+                            counter--;
+
+                        }
+                        if (counter == 0)
+                        {
+                            int[] lastIndexes = indexStack.Pop();
+                            lastIndexes[1] = lengthOfBlock;
+                            indexStack.Push(lastIndexes);
+                            Console.WriteLine($"pop, index:{index} counter:{counter}");
+                            isOpenBlock = false;
+                        }
+                        lengthOfBlock++;
+                    }
+                    index++;
+                }
             }
-            res = IsExpr(a) ? Eval(a) : double.Parse(a);
-            return res;
+            if (counter != 0)
+            {
+                throw new Exception("Unclosed Paranthesis Problem!");
+            }
+            result = new string[indexStack.Count];
+            {
+                int i = 0;
+                foreach (int[] indexes in indexStack)
+                {
+                    Console.WriteLine($"write, index0:{indexes[0]} index1:{indexes[1]}");
+                    result[i] = expr.Substring(indexes[0], indexes[1]);
+                    i++;
+                }
+            }
+            return result;
         }
 
-        public struct ArithmaticExpressionvalidationStatus
+        public struct ArithmaticExpressionvalidationResult
         {
             public bool HasOpenParenthesis { get; set; }
             public bool HasConsecutiveOperators { get; set; }
 
-            public ArithmaticExpressionvalidationStatus(bool hasOpenParenthesis, bool hasConsecutiveOperators)
+            public ArithmaticExpressionvalidationResult(bool hasOpenParenthesis, bool hasConsecutiveOperators)
             {
                 this.HasOpenParenthesis = hasOpenParenthesis;
                 this.HasConsecutiveOperators = hasConsecutiveOperators;
@@ -225,5 +300,80 @@ namespace CalculatorApp
                 $"Expression {(HasOpenParenthesis ? "has open paranthesis, " : string.Empty)}" +
                 $"{(HasConsecutiveOperators ? "has consecutive operators" : string.Empty)}";
         }
+
+        private class ArithmeticExpression
+        {
+            public string Expression { get; } = "";
+
+            ArithmeticExpression(string expr)
+            {
+                this.Expression = expr;
+            }
+
+
+            static ArithmeticExpression getExpression(string expr)
+            {
+                return new ArithmeticExpression(expr);
+            }
+
+            public static bool IsExpr(string expr)
+            {
+                return WrappedInParanthesis(expr) || HasOperators(expr);
+            }
+
+            public static bool WrappedInParanthesis(string expr)
+            {
+                expr = expr.Trim();
+                bool isfirstParanthesisOpen;
+                bool isfirstAndLastCharParanthesis = expr.StartsWith("(") && expr.EndsWith(")");
+                int counter = 0;
+                if (isfirstAndLastCharParanthesis == false)
+                {
+                    return false;
+                }
+                isfirstParanthesisOpen = true;
+                foreach(char c in expr)
+                {
+                    //if there is more chars after first paranthesis is closed
+                    if (isfirstParanthesisOpen == false)
+                    {
+                        return false;
+                    }
+                    if(c == ')'){
+                        counter--;
+                        
+                    }
+                    if (c == '(')
+                    {
+                        counter++;
+                    }
+                    //if counter == 0 means that there is no more open paranthesis
+                    // that means the first paranthesis is closed
+                    if(counter == 0)
+                    {
+                        isfirstParanthesisOpen = false;
+                    }
+                }
+                return true;
+
+            }
+
+            public static bool HasOperators(string expr)
+            {
+                foreach(char c in expr)
+                {
+                    if(_operators.Contains(c))
+                    {
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+
+        }
+
     }
+
+
 }
