@@ -311,6 +311,5 @@ namespace CalculatorApp
         {
             OpenCloseConsole();
         }
-
     }
 }

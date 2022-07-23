@@ -175,7 +175,6 @@ namespace CalculatorApp
             this.groupBox1.Size = new System.Drawing.Size(494, 270);
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
             // 
             // buttonConsol
             // 
@@ -411,7 +410,6 @@ namespace CalculatorApp
             this.groupBox2.Size = new System.Drawing.Size(490, 80);
             this.groupBox2.TabIndex = 8;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
             // 
             // InputBox
             // 
