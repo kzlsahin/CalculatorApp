@@ -97,12 +97,23 @@ namespace ArithmeticEvaluator
                 string replacedExpression = match.Value.Replace("(", "*(");
                 expr = expr.Replace(match.Value, replacedExpression);
             }
+            foreach (Match match in Regex.Matches(expr, @"\d+\s*[√]"))
+            {
+                string replacedExpression = match.Value.Replace("√", "*√");
+                expr = expr.Replace(match.Value, replacedExpression);
+            }
             // transform expressions like )( to number )*(
             foreach (Match match in Regex.Matches(expr, @"[)]\s*[(]"))
             {
                 string replacedExpression = match.Value.Replace("(", "*(");
                 expr = expr.Replace(match.Value, replacedExpression);
             }
+            foreach (Match match in Regex.Matches(expr, @"[)]\s*[√]"))
+            {
+                string replacedExpression = match.Value.Replace("√", "*√");
+                expr = expr.Replace(match.Value, replacedExpression);
+            }
+
 
             // evaluate sub parathesis blocks first
             foreach (String parantblock in GetParanthesisBlocks(expr))
