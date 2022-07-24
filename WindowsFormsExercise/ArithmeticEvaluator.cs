@@ -9,7 +9,7 @@ namespace ArithmeticEvaluator
 {
     public class Evaluator
     {
-
+        
         public static readonly char[] Operators = { '+', '-', '/', '*', '^', '√' };
 
         public Func<string, bool> WrappedInParanthesis = ArithmeticExpression.WrappedInParanthesis;

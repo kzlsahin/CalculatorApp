@@ -363,7 +363,7 @@ namespace CalculatorApp
             this.buttonDot.Name = "buttonDot";
             this.buttonDot.Size = new System.Drawing.Size(70, 49);
             this.buttonDot.TabIndex = 10;
-            this.buttonDot.Text = ".";
+            this.buttonDot.Text = ",";
             this.buttonDot.UseVisualStyleBackColor = true;
             this.buttonDot.Click += new System.EventHandler(this.ButtonValue_Click);
             // 

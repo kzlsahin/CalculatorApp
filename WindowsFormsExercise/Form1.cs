@@ -8,20 +8,26 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ArithmeticEvaluator;
+using System.Globalization;
 
 namespace CalculatorApp
 {
     public partial class Form1 : Form
     {
+        public NumberFormatInfo NFI = NumberFormatInfo.CurrentInfo;
         private double lastResult;
         private int _openParanthesis;
-        private bool _isLastEntrySolved = false;
-        private string  _lastExpression = "";
         private ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
+        string _decimalSeperator;
+        private bool _isLastEntrySolved = false;
+        private string _lastExpression = "";
         public Form1()
         {
             InitializeComponent();
             buttonSQRT.Text = "\u221aX";
+            _decimalSeperator = NFI.NumberDecimalSeparator;
+            buttonDot.Text = _decimalSeperator;
+            PrintLine("\n\r Number Decimal Seperator: " + _decimalSeperator);
         }
 
         public void PrintLine(string str)
@@ -67,9 +73,10 @@ namespace CalculatorApp
                 }
                 lastResult = evaluator.Eval(expr);
 
-                PrintLine($"{expr} evaluated");
-
-                _isLastEntrySolved = true;
+                PrintLine($"0,11 evaluated");
+                PrintLine(_decimalSeperator);
+                PrintLine( (double.Parse("0,11") * 10).ToString() );
+               _isLastEntrySolved = true;
                 _lastExpression = expr;
             }
             catch (Exception ex)
