@@ -9,12 +9,33 @@ namespace ArithmeticEvaluator
 {
     public class Evaluator
     {
-        
-        public static readonly char[] Operators = { '+', '-', '/', '*', '^', '√' };
-
         public Func<string, bool> WrappedInParanthesis = ArithmeticExpression.WrappedInParanthesis;
         public Func<string, bool> HasOperators = ArithmeticExpression.HasOperators;
         public Func<string, bool> IsExpr = ArithmeticExpression.IsExpr;
+
+        public class Operators
+        {
+            public static char[] UnaryOperators { get; } = { '√' };
+            public static char[] BinaryOperators { get; } = { '+', '-', '/', '*', '^' };
+
+            public static bool IsUnaryOperator(char x) => UnaryOperators.Contains(x);
+            public static bool IsBinaryOperator(char x) => BinaryOperators.Contains(x);
+            public static bool IsOperator(string x) => IsUnaryOperator(x) || IsBinaryOperator(x);
+            public static bool IsOperator(char x) => IsUnaryOperator(x) || IsBinaryOperator(x);
+            public static bool IsUnaryOperator(string x)
+            {
+                x = x.Trim();
+                if (x.Length > 1) return false;
+                return UnaryOperators.Contains(x[0]);
+            }
+            public static bool IsBinaryOperator(string x)
+            {
+                x = x.Trim();
+                if (x.Length > 1) return false;
+                return BinaryOperators.Contains(x[0]);
+            }
+
+        }
 
         public ArithmaticExpressionvalidationResult ValidateExpression(string expr)
         {
@@ -54,7 +75,7 @@ namespace ArithmeticEvaluator
                     prevC = c;
                     continue;
                 }
-                if (Operators.Contains(c) && Operators.Contains(prevC))
+                if (Operators.IsOperator(c) && Operators.IsOperator(prevC))
                 {
                     return true;
                 }
@@ -251,9 +272,9 @@ namespace ArithmeticEvaluator
                 foreach (char c in expr)
                 {
                     if (c == '(')
-                    {                        
+                    {
                         //open a paranthesis
-                        if(counter == 0)
+                        if (counter == 0)
                         {
                             indexStack.Push(new int[2] { index, 0 });
                             isOpenBlock = true;
@@ -382,7 +403,7 @@ namespace ArithmeticEvaluator
             {
                 foreach (char c in expr)
                 {
-                    if (Operators.Contains(c))
+                    if (Operators.IsOperator(c))
                     {
                         return true;
                     }

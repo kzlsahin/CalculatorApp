@@ -102,7 +102,8 @@ namespace CalculatorApp
         {
             if (_isLastEntrySolved)
             {
-                if (Evaluator.Operators.Contains(inputChar))
+                //if first input is binary operator add last answer first
+                if (Evaluator.Operators.IsBinaryOperator(inputChar))
                 {
                     InputBox.Text = lastResult.ToString();
                 }
@@ -118,15 +119,18 @@ namespace CalculatorApp
 
         private void PushToInputScreen(string inputString)
         {
-            bool isOperator = false;
+            bool isBinaryOperator = false;
             if (inputString.Trim().Length == 1)
             {
-                isOperator = Evaluator.Operators.Contains(inputString.Trim()[0]);
-                PrintLine($"isoperator: {isOperator}  input: {inputString} isLastEntrySolve= {_isLastEntrySolved}");
+                //if first input is binary operator add last answer first
+                isBinaryOperator = Evaluator.Operators.IsBinaryOperator(inputString.Trim()[0]);
+                bool isOperator = Evaluator.Operators.IsOperator(inputString.Trim()[0]);
+                PrintLine($"is binary operator: {isBinaryOperator}  input: {inputString} isLastEntrySolve= {_isLastEntrySolved}");
+                PrintLine($"is operator: {isOperator}  input: {inputString} isLastEntrySolve= {_isLastEntrySolved}");
             }
             if (_isLastEntrySolved )
             {
-                if (isOperator)
+                if (isBinaryOperator)
                 {
                     InputBox.Text = lastResult.ToString();
                 }
