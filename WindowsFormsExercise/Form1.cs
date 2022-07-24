@@ -20,6 +20,7 @@ namespace CalculatorApp
         private ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
         string _decimalSeperator;
         private bool _isLastEntrySolved = false;
+        private bool _errorShown = false;
         private string _lastExpression = "";
         public Form1()
         {
@@ -75,8 +76,8 @@ namespace CalculatorApp
 
                 PrintLine($"0,11 evaluated");
                 PrintLine(_decimalSeperator);
-                PrintLine( (double.Parse("0,11") * 10).ToString() );
-               _isLastEntrySolved = true;
+                PrintLine((double.Parse("0,11") * 10).ToString());
+                _isLastEntrySolved = true;
                 _lastExpression = expr;
             }
             catch (Exception ex)
@@ -95,6 +96,7 @@ namespace CalculatorApp
             else
             {
                 ansScreen.Text = "expression couldn't be resolved";
+                _errorShown = true;
             }
 
         }
@@ -113,8 +115,10 @@ namespace CalculatorApp
                 }
                 _isLastEntrySolved = false;
             }
-                InputBox.Text += inputChar;
-                ansScreen.Focus();
+            InputBox.Text += inputChar;
+            ansScreen.Focus();
+
+            if (_errorShown) ansScreen.Text = String.Empty;
         }
 
         private void PushToInputScreen(string inputString)
@@ -128,7 +132,7 @@ namespace CalculatorApp
                 PrintLine($"is binary operator: {isBinaryOperator}  input: {inputString} isLastEntrySolve= {_isLastEntrySolved}");
                 PrintLine($"is operator: {isOperator}  input: {inputString} isLastEntrySolve= {_isLastEntrySolved}");
             }
-            if (_isLastEntrySolved )
+            if (_isLastEntrySolved)
             {
                 if (isBinaryOperator)
                 {
@@ -141,8 +145,10 @@ namespace CalculatorApp
                 }
                 _isLastEntrySolved = false;
             }
-                InputBox.Text += inputString;
-                ansScreen.Focus();
+            InputBox.Text += inputString;
+            ansScreen.Focus();
+
+            if (_errorShown) ansScreen.Text = String.Empty;
         }
 
         private void ClearScreen()
