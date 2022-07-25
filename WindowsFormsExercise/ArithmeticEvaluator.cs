@@ -60,7 +60,6 @@ namespace ArithmeticEvaluator
                     openParenthesis--;
                 }
             }
-
             return openParenthesis != 0;
         }
 
@@ -137,8 +136,6 @@ namespace ArithmeticEvaluator
                 string replacedExpression = match.Value.Replace("√", "*√");
                 expr = expr.Replace(match.Value, replacedExpression);
             }
-
-
             // evaluate sub parathesis blocks first
             foreach (String parantblock in GetParanthesisBlocks(expr))
             {
@@ -147,13 +144,11 @@ namespace ArithmeticEvaluator
             }
 
             //Coution evaluator reaches here after all the sub paranthesis are evaluated before
-
             if (expr.Contains('+'))
             {
                 string[] expressions = expr.Split('+');
                 return Operate(expressions, '+');
             }
-
             if (expr.Contains('-'))
             {
                 string[] expressions = expr.Split('-');
@@ -191,7 +186,6 @@ namespace ArithmeticEvaluator
             {
                 throw new Exception("Arithmetic Expression couldn't be solved");
             }
-
         }
 
         private static double CalculateSqrt(string value)
@@ -268,7 +262,6 @@ namespace ArithmeticEvaluator
             int counter = 0;
             var indexStack = new Stack<int[]>();
             bool isOpenBlock = false;
-
             {
                 int index = 0;
                 int lengthOfBlock = 0;
@@ -286,17 +279,14 @@ namespace ArithmeticEvaluator
                         }
                         counter++;
                     }
-
                     if (c == ')')
                     {
                         counter--;
-
                     }
                     //if counter == 0 means that there is no more open paranthesis
                     // that means the first paranthesis is closed
                     if (isOpenBlock)
                     {
-
                         if (counter == 0)
                         {
                             int[] lastIndexes = indexStack.Pop();
@@ -352,18 +342,14 @@ namespace ArithmeticEvaluator
             {
                 this.Expression = expr;
             }
-
-
             static ArithmeticExpression getExpression(string expr)
             {
                 return new ArithmeticExpression(expr);
             }
-
             public static bool IsExpr(string expr)
             {
                 return WrappedInParanthesis(expr) || HasOperators(expr);
             }
-
             public static bool WrappedInParanthesis(string expr)
             {
                 expr = expr.Trim();
@@ -385,7 +371,6 @@ namespace ArithmeticEvaluator
                     if (c == ')')
                     {
                         counter--;
-
                     }
                     if (c == '(')
                     {
@@ -399,7 +384,6 @@ namespace ArithmeticEvaluator
                     }
                 }
                 return true;
-
             }
 
             public static bool HasOperators(string expr)
@@ -413,8 +397,6 @@ namespace ArithmeticEvaluator
                 }
                 return false;
             }
-
-
         }
 
         class TrigonometryCalculator
@@ -423,7 +405,6 @@ namespace ArithmeticEvaluator
             public static string Sine(string x) => (Math.Sin(GetDoubleValue(x))).ToString();
             public static string Tan(string x) => (Math.Tan(GetDoubleValue(x))).ToString();
             public static string Cot(string x) => (1 / Math.Tan(GetDoubleValue(x))).ToString();
-
         }
 
     }
