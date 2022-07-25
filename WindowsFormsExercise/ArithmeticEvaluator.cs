@@ -9,18 +9,21 @@ namespace ArithmeticEvaluator
 {
     public class Evaluator
     {
-        public Func<string, bool> WrappedInParanthesis = ArithmeticExpression.WrappedInParanthesis;
-        public Func<string, bool> HasOperators = ArithmeticExpression.HasOperators;
-        public Func<string, bool> IsExpr = ArithmeticExpression.IsExpr;
+        public static Func<string, bool> WrappedInParanthesis = ArithmeticExpression.WrappedInParanthesis;
+        public static Func<string, bool> HasOperators = ArithmeticExpression.HasOperators;
+        public static Func<string, bool> IsExpr = ArithmeticExpression.IsExpr;
 
         public class Operators
         {
             public static char[] UnaryOperators { get; } = { '√' };
             public static char[] BinaryOperators { get; } = { '+', '-', '/', '*', '^' };
 
+            public static string[] functionOperators { get; } = { "cos", "sin", "tan", "cot", "log", "ln" };
+
             public static bool IsUnaryOperator(char x) => UnaryOperators.Contains(x);
             public static bool IsBinaryOperator(char x) => BinaryOperators.Contains(x);
-            public static bool IsOperator(string x) => IsUnaryOperator(x) || IsBinaryOperator(x);
+            public static bool IsFuncOperator(string x) => functionOperators.Contains( x.Trim() );
+            public static bool IsOperator(string x) => IsUnaryOperator(x) || IsBinaryOperator(x) || IsFuncOperator(x);
             public static bool IsOperator(char x) => IsUnaryOperator(x) || IsBinaryOperator(x);
             public static bool IsUnaryOperator(string x)
             {
@@ -37,13 +40,13 @@ namespace ArithmeticEvaluator
 
         }
 
-        public ArithmaticExpressionvalidationResult ValidateExpression(string expr)
+        public static ArithmaticExpressionvalidationResult ValidateExpression(string expr)
         {
             var res = new ArithmaticExpressionvalidationResult(AnyOpenParenthesis(expr), AnyConsecutiveOperator(expr));
             return res;
         }
 
-        public bool AnyOpenParenthesis(string expr)
+        public static bool AnyOpenParenthesis(string expr)
         {
             int openParenthesis = 0;
             foreach (char c in expr)
@@ -61,7 +64,7 @@ namespace ArithmeticEvaluator
             return openParenthesis != 0;
         }
 
-        public bool AnyConsecutiveOperator(string expr)
+        public static bool AnyConsecutiveOperator(string expr)
         {
             char prevC = ' ';
             foreach (char c in expr)
@@ -84,12 +87,12 @@ namespace ArithmeticEvaluator
             return false;
         }
 
-        public double Eval(string expr, double ifNullOrEmptyReturn = 0)
+        public static double Eval(string expr, double ifNullOrEmptyReturn = 0)
         {
             string defaultValue = ifNullOrEmptyReturn.ToString();
             return GetDoubleValue(expr, defaultValue);
         }
-        private double GetDoubleValue(string a, string baseValue = "0")
+        private static double GetDoubleValue(string a, string baseValue = "0")
         {
             double res = 0;
             a = a.Trim();
@@ -101,7 +104,7 @@ namespace ArithmeticEvaluator
             res = IsExpr(a) ? EvalExpression(a) : double.Parse(a);
             return res;
         }
-        private double EvalExpression(string expr)
+        private static double EvalExpression(string expr)
         {
             expr = expr.Trim();
             // if the whole  expression is inside a single parathesis block
@@ -191,13 +194,13 @@ namespace ArithmeticEvaluator
 
         }
 
-        private double CalculateSqrt(string value)
+        private static double CalculateSqrt(string value)
         {
             double val = GetDoubleValue(value);
             return Math.Sqrt(val);
         }
 
-        private double Operate(string[] args, char OpSymbol)
+        private static double Operate(string[] args, char OpSymbol)
         {
             double res = 0;
             double x;
@@ -412,6 +415,12 @@ namespace ArithmeticEvaluator
             }
 
 
+        }
+
+        class TrigonometryCalculator
+        {
+            public static string Consine(string x) => (Math.Cos(GetDoubleValue(x))).ToString();
+            
         }
 
     }

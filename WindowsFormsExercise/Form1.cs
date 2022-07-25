@@ -17,7 +17,7 @@ namespace CalculatorApp
         public NumberFormatInfo NFI = NumberFormatInfo.CurrentInfo;
         private double lastResult;
         private int _openParanthesis;
-        private ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
+        //private ArithmeticEvaluator.Evaluator evaluator = new ArithmeticEvaluator.Evaluator();
         string _decimalSeperator;
         private bool _isLastEntrySolved = false;
         private bool _errorShown = false;
@@ -65,14 +65,14 @@ namespace CalculatorApp
         {
             try
             {
-                var validationStatus = evaluator.ValidateExpression(expr);
+                var validationStatus = Evaluator.ValidateExpression(expr);
                 if (validationStatus.IsValid() == false)
                 {
                     PrintLine(validationStatus.ToString());
                     _isLastEntrySolved = false;
                     throw new ArgumentException("Expression syntax is not valid.");
                 }
-                lastResult = evaluator.Eval(expr);
+                lastResult = Evaluator.Eval(expr);
 
                 PrintLine($"0,11 evaluated");
                 PrintLine(_decimalSeperator);
@@ -162,7 +162,7 @@ namespace CalculatorApp
         {
             string expressionText = InputBox.Text;
 
-            if (evaluator.AnyOpenParenthesis(expressionText))
+            if (Evaluator.AnyOpenParenthesis(expressionText))
             {
                 NotifyOpenParanthesis();
                 return;
