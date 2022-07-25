@@ -420,7 +420,10 @@ namespace ArithmeticEvaluator
         class TrigonometryCalculator
         {
             public static string Consine(string x) => (Math.Cos(GetDoubleValue(x))).ToString();
-            
+            public static string Sine(string x) => (Math.Sin(GetDoubleValue(x))).ToString();
+            public static string Tan(string x) => (Math.Tan(GetDoubleValue(x))).ToString();
+            public static string Cot(string x) => (1 / Math.Tan(GetDoubleValue(x))).ToString();
+
         }
 
     }

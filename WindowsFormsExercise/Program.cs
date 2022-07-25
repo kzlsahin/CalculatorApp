@@ -1,9 +1,9 @@
-﻿using System;
+﻿using ArithmeticEvaluator;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ArithmeticEvaluator.Evaluator;
 
 namespace CalculatorApp
 {
@@ -70,7 +70,7 @@ namespace CalculatorApp
 
             try
             {
-                result = evaluator.Eval(expr);
+                result = Evaluator.Eval(expr);
                 bool res = expected == result;
 
                 PrintLine($"  result: {result}");
